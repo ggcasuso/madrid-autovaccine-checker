@@ -25,6 +25,8 @@ class AutoVaccineChecker:
 
         end_date = datetime.strptime(response.json()['dFin_Birthday'], '%d/%m/%Y')
 
+        print(f'Current limit year: {end_date.year}')
+
         if end_date.year == self.birth_year:
             self.notify('You can make an appointment now to COVID-19 vaccination')
             return True
