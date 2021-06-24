@@ -1,6 +1,7 @@
 import requests
 import json
-from datetime import datetime
+from zoneinfo import ZoneInfo
+from datetime import datetime, timezone
 
 import config
 from TelegramBot import TelegramBot
@@ -17,7 +18,9 @@ class AutoVaccineChecker:
         self.URL = auto_vaccine_url
 
     def available(self):
-        print('Checking...')
+        current_date = datetime.now().replace(tzinfo=timezone.utc).astimezone(ZoneInfo("Europe/Madrid"))
+
+        print(f'[{current_date.strftime("%Y-%m-%d %H:%M:%S")}] Checking...')
 
         response = requests.get(
             url=self.URL
